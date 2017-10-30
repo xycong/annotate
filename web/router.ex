@@ -22,6 +22,11 @@ defmodule Annotate.Router do
     resources "/sessions", SessionController, only: [:new, :create, :delete]
   end
 
+  scope "/manage", Annotate do
+    pipe_through [:browser, :authenticate_user]
+    resources "/videos", VideoController
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", Annotate do
   #   pipe_through :api
