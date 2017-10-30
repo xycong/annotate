@@ -1,5 +1,5 @@
 defmodule Annotate.SessionController do
-  use Rumbl.Web, :controller
+  use Annotate.Web, :controller
 
   def new(conn, _) do 
     render conn, "new.html"
@@ -16,4 +16,11 @@ defmodule Annotate.SessionController do
         |> put_flash(:error, "Invalid username/password combination")
         |> render("new.html")
     end
+  end
+
+  def delete(conn, _) do
+    conn
+    |> Annotate.Auth.logout()
+    |> redirect(to: page_path(conn, :index))
+  end
 end
