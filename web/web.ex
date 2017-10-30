@@ -36,6 +36,7 @@ defmodule Annotate.Web do
 
       import Annotate.Router.Helpers
       import Annotate.Gettext
+      import Annotate.Auth, only: [authenticate_user: 2]
     end
   end
 
@@ -58,6 +59,8 @@ defmodule Annotate.Web do
   def router do
     quote do
       use Phoenix.Router
+
+      import Annotate.Auth, only: [authenticate_user: 2]
     end
   end
 
