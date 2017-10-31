@@ -9,13 +9,5 @@ defmodule Annotate.Repo.Migrations.CreateCategory do
     end
 
     create unique_index(:categories, [:name])
-
-    def alphabetical(query) do
-      from c in query, order_by: c.name
-    end
-
-    def names_and_ids(query) do
-      from c in query, select: {c.name, c.id}
-    end
   end
 end

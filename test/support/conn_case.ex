@@ -26,6 +26,7 @@ defmodule Annotate.ConnCase do
       import Ecto.Query
 
       import Annotate.Router.Helpers
+      import Annotate.TestHelpers
 
       # The default endpoint for testing
       @endpoint Annotate.Endpoint
