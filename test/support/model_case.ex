@@ -21,6 +21,7 @@ defmodule Annotate.ModelCase do
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
+      import Annotate.TestHelpers
       import Annotate.ModelCase
     end
   end
@@ -59,6 +60,12 @@ defmodule Annotate.ModelCase do
   """
   def errors_on(struct, data) do
     struct.__struct__.changeset(struct, data)
+    |> Ecto.Changeset.traverse_errors(&Annotate.ErrorHelpers.translate_error/1)
+    |> Enum.flat_map(fn {key, errors} -> for msg <- errors, do: {key, msg} end)
+  end
+
+  def errors_on(changeset) do
+    changeset
     |> Ecto.Changeset.traverse_errors(&Annotate.ErrorHelpers.translate_error/1)
     |> Enum.flat_map(fn {key, errors} -> for msg <- errors, do: {key, msg} end)
   end
